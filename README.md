@@ -31,32 +31,34 @@ Or setting your own keyboard handler with open property ANKeyboardHandler* keybo
 ANTableController initialize example:
 ```objc
 @property (strong,nonatomic) ANTableController *tableController;
-self.tableController = [[ANTableController alloc] initWithTableView:self.tableView];
+@property (nonatomic,strong) ANMemoryStorage *storage;
 
+self.tableController = [[ANTableController alloc] initWithTableView:self.tableView];
+self.storage = [ANMemoryStorage storage];
 //After that just initialize memory storage wit data model:
 
-self.tableController.memoryStorage = [ANMemoryStorage storage];
+self.tableController.memoryStorage = self.storage;
  ANTestModelClass * testModel = [[ANTestModelClass alloc]init];
     testModel.firstName = @"John";
     testModel.lastName = @"Snow";
 
-[self.tableController.memoryStorage addItem:testModel];
+[self.storage addItem:testModel];
 ```
 ###ANMemoryStorage
 Allow you update table view data with single model or model arrays, or send configuration block with needs update. 
 For example to add/remove item in first section example:
 ```objc
-[self.tableController.memoryStorage removeItem:testModel];
-[self.tableController.memoryStorage addItem:testModel];
+[self.storage removeItem:testModel];
+[self.storage addItem:testModel];
 ```
 To add item in certain section example:
 ```objc
-[self.tableController.memoryStorage addItems:@[testModel] toSection:1];
+[self.storage addItems:@[testModel] toSection:1];
 ```
 Send batch update block example:
 ```objc
-[self.tableController. memoryStorage batchUpdateWithBlock:^{
-      [self.tableController.memoryStorage addItems:@[testModel] toSection:1];
+[self.storage batchUpdateWithBlock:^{
+      [self.storage addItems:@[testModel] toSection:1];
  }];
  ```
  
@@ -64,12 +66,14 @@ Send batch update block example:
 Every table view cell should implement protocol ANModelTransfer.
 creation example:
  ```objc
- #import <UIKit/UIKit.h>
+#import <UIKit/UIKit.h>
 #import <ANStorage/ANModelTransfer.h>
 @interface ANTestTableViewCell : UITableViewCell <ANModelTransfer>
 @end
 
 @implementation  ANTestTableViewCell
+
+#pragma mark ANModelTransfer protocol methods
 - (void)updateWithModel:(id)model {
     if ([model isKindOfClass:[ANTestModelClass class]]) {
         self.modelClass = model;
