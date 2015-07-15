@@ -69,6 +69,7 @@ TableViewCell example:
  ```objc
 #import <UIKit/UIKit.h>
 #import <ANStorage/ANModelTransfer.h>
+#import "FDTestModelClass.h"
 @interface ANTestTableViewCell : UITableViewCell <ANModelTransfer>
 @property (nonatomic,strong) FDTestModelClass* testModel;
 @end
