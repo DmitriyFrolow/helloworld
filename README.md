@@ -64,7 +64,8 @@ Send batch update block example:
  
 ###TableViewCell 
 Every table view cell should implement protocol ANModelTransfer.
-creation example:
+
+TableViewCell example:
  ```objc
 #import <UIKit/UIKit.h>
 #import <ANStorage/ANModelTransfer.h>
