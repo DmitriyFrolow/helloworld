@@ -38,7 +38,7 @@ self.storage = [ANMemoryStorage storage];
 //After that just initialize memory storage wit data model:
 
 self.tableController.memoryStorage = self.storage;
- ANTestModelClass * testModel = [[ANTestModelClass alloc]init];
+ ANTestModelClass* testModel = [[ANTestModelClass alloc]init];
     testModel.firstName = @"John";
     testModel.lastName = @"Snow";
 
@@ -70,21 +70,19 @@ TableViewCell example:
 #import <UIKit/UIKit.h>
 #import <ANStorage/ANModelTransfer.h>
 @interface ANTestTableViewCell : UITableViewCell <ANModelTransfer>
+@property (nonatomic,strong) FDTestModelClass* testModel;
 @end
 
 @implementation  ANTestTableViewCell
 
 #pragma mark ANModelTransfer protocol methods
 - (void)updateWithModel:(id)model {
-    if ([model isKindOfClass:[ANTestModelClass class]]) {
-        self.modelClass = model;
-        ANTestModelClass *testModel = (ANTestModelClass *)model;
-        self.topLabel.text = testModel.firstName;
-        self.bottomTextField.text = testModel.lastName;
-    }
+        self.testModel = (ANTestModelClass *)model;
+        self.topLabel.text = self.testModel.firstName;
+        self.bottomTextField.text = self.testModel.lastName;
 }
 - (id)model {
-    return self.modelClass;
+    return self.testModel;
 }
 @end
   ```
