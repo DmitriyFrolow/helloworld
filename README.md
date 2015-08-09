@@ -71,7 +71,7 @@ TableViewCell example:
 #import <ANStorage/ANModelTransfer.h>
 #import "ANTestModelClass.h"
 @interface ANTestTableViewCell : UITableViewCell <ANModelTransfer>
-@property (nonatomic,strong) FDTestModelClass* testModel;
+@property (nonatomic,strong) ANTestModelClass* testModel;
 @end
 
 @implementation  ANTestTableViewCell
